@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 const EnvironmentalAppSections = () => {
   return (
     <>
-    <Navbar/>
       {/* Features Section */}
       <section className="py-12 bg-white">
         <div className="max-w-6xl mx-auto px-4">

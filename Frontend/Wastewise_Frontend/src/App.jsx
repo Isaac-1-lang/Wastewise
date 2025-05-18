@@ -1,15 +1,19 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import './index.css';
-import { useState } from 'react';
 import EnvironmentalAppSections from './pages/Home';
+import RwandaWasteCollectionPoints from './pages/CollectionPoints';
 
+const App = () => {
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<EnvironmentalAppSections />} />
+        <Route path="/collection-points" element={<RwandaWasteCollectionPoints />} />
+      </Routes>
+    </Router>
+  );
+};
 
-
-const App= () => {return (
-  <div className="App">
-    <EnvironmentalAppSections/>
-  </div>
-)
-
-}
 export default App;
