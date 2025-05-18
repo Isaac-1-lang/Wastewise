@@ -30,6 +30,7 @@
     "react-leaflet": "^5.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.30.0",
+    "react-spinners": "^0.17.0",
     "recharts": "^2.15.3",
     "yup": "^1.6.1"
   },
