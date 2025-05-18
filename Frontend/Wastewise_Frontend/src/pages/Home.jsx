@@ -1,6 +1,7 @@
 import React from "react";
 import { Leaf, Users, Recycle, MapPin, Calendar, Award, ThumbsUp, TrendingUp } from "lucide-react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const EnvironmentalAppSections = () => {
   return (
@@ -10,7 +11,6 @@ const EnvironmentalAppSections = () => {
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-2xl font-bold text-emerald-800 mb-2">Features of our services</h2>
           <div className="h-1 w-16 bg-emerald-500 mb-8"></div>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Community Chat Feature */}
             <div className="bg-emerald-50 rounded-lg p-6 border border-emerald-100">
@@ -296,6 +296,7 @@ const EnvironmentalAppSections = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </>
   );
 };
