@@ -4,7 +4,6 @@ import './index.css';
 import EnvironmentalAppSections from './pages/Home';
 import RwandaMap from './pages/CollectionPoints';
 import Login from './pages/Login';
-import { useEffect } from 'react';
 import Register from './pages/Register';
 
 const App = () => {
