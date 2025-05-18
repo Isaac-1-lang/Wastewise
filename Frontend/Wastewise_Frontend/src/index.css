@@ -20,3 +20,11 @@
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+
+
+.custom-icon {
+  filter: hue-rotate(120deg);
+}
+.leaflet-popup-content {
+  font-family: 'Arial', sans-serif;
+}

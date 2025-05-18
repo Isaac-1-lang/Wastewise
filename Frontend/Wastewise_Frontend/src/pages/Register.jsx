@@ -189,7 +189,7 @@ const Register = () => {
             className={`w-full p-3 rounded-lg text-white font-semibold transition-all duration-200 ${
               loading ? 'bg-emerald-300 cursor-not-allowed' : 'bg-emerald-500 hover:bg-emerald-600'
             } flex items-center justify-center`}
-            aria-label="Register"
+            aria-label="Register"  onClick={()=>navigate('/collection-points')}
           >
             {loading ? <ClipLoader size={20} color="#fff" /> : 'Register'}
           </button>
