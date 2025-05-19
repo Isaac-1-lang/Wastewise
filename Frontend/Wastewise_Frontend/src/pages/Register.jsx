@@ -1,45 +1,33 @@
 import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
+import axios from 'axios';
 
 const Register = () => {
-  const [form, setForm] = useState({ username: '', email: '', password: '', confirmPassword: '' });
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    username: '',
+    email: '',
+    password: '',
+    token: '',
+  });
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors = {};
-    if (!form.username) {
-      newErrors.username = 'Username is required';
-    } else if (form.username.length < 3) {
-      newErrors.username = 'Username must be at least 3 characters';
-    }
-    if (!form.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-      newErrors.email = 'Invalid email format';
-    }
-    if (!form.password) {
-      newErrors.password = 'Password is required';
-    } else if (form.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-    if (!form.confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password';
-    } else if (form.password !== form.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
+    if (!form.username.trim()) newErrors.username = 'Username is required';
+    if (!form.email.trim()) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(form.email)) newErrors.email = 'Email is invalid';
+    if (!form.password) newErrors.password = 'Password is required';
+    if (!form.token.trim()) newErrors.token = 'Token is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: '' });
-    setApiError('');
   };
 
   const handleSubmit = async e => {
@@ -51,160 +39,100 @@ const Register = () => {
         username: form.username,
         email: form.email,
         password: form.password,
+        token: form.token,
       });
       localStorage.setItem('token', res.data.token);
-      navigate('/dashboard');
+      
     } catch (err) {
       setApiError(err.response?.data?.message || 'Registration failed');
+      navigate('/collection-points');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 p-4">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md transform transition-all duration-300 hover:scale-105">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold text-center mb-6 text-emerald-600">Register</h2>
         {apiError && (
-          <p className="text-red-500 text-sm text-center mb-4" role="alert">
+          <div className="bg-red-100 text-red-700 px-4 py-2 mb-4 rounded">
             {apiError}
-          </p>
+          </div>
         )}
-        <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+        <form className="space-y-5" noValidate>
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-              Username
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Username</label>
             <input
-              id="username"
-              name="username"
               type="text"
-              placeholder="Enter your username"
+              name="username"
               value={form.username}
               onChange={handleChange}
-              required
-              aria-invalid={errors.username ? 'true' : 'false'}
-              aria-describedby={errors.username ? 'username-error' : undefined}
-              className={`w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors ${
+              className={`w-full p-2 border ${
                 errors.username ? 'border-red-500' : 'border-gray-300'
-              }`}
+              } rounded`}
+              placeholder="Enter username"
             />
-            {errors.username && (
-              <p id="username-error" className="text-red-500 text-xs mt-1">
-                {errors.username}
-              </p>
-            )}
+            {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
           </div>
+
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
-              id="email"
-              name="email"
               type="email"
-              placeholder="Enter your email"
+              name="email"
               value={form.email}
               onChange={handleChange}
-              required
-              aria-invalid={errors.email ? 'true' : 'false'}
-              aria-describedby={errors.email ? 'email-error' : undefined}
-              className={`w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors ${
+              className={`w-full p-2 border ${
                 errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+              } rounded`}
+              placeholder="Enter email"
             />
-            {errors.email && (
-              <p id="email-error" className="text-red-500 text-xs mt-1">
-                {errors.email}
-              </p>
-            )}
+            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
           </div>
+
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
-              id="password"
-              name="password"
               type="password"
-              placeholder="Enter your password"
+              name="password"
               value={form.password}
               onChange={handleChange}
-              required
-              aria-invalid={errors.password ? 'true' : 'false'}
-              aria-describedby={errors.password ? 'password-error' : undefined}
-              className={`w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors ${
+              className={`w-full p-2 border ${
                 errors.password ? 'border-red-500' : 'border-gray-300'
-              }`}
+              } rounded`}
+              placeholder="Enter password"
             />
-            {errors.password && (
-              <p id="password-error" className="text-red-500 text-xs mt-1">
-                {errors.password}
-              </p>
-            )}
+            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
           </div>
+
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-              Confirm Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Token</label>
             <input
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm your password"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              required
-              aria-invalid={errors.confirmPassword ? 'true' : 'false'}
-              aria-describedby={errors.confirmPassword ? 'confirmPassword-error' : undefined}
-              className={`w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors ${
-                errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-              }`}
-            />
-            {errors.confirmPassword && (
-              <p id="confirmPassword-error" className="text-red-500 text-xs mt-1">
-                {errors.confirmPassword}
-              </p>
-            )}
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              id="token"
-              name="token"
               type="text"
-              placeholder="Enter company token"
+              name="token"
               value={form.token}
               onChange={handleChange}
-              required
-              className={`w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full p-2 border ${
+                errors.token ? 'border-red-500' : 'border-gray-300'
+              } rounded`}
+              placeholder="Enter token"
             />
+            {errors.token && <p className="text-red-500 text-sm">{errors.token}</p>}
           </div>
+
           <button
             type="submit"
             disabled={loading}
             className={`w-full p-3 rounded-lg text-white font-semibold transition-all duration-200 ${
               loading ? 'bg-emerald-300 cursor-not-allowed' : 'bg-emerald-500 hover:bg-emerald-600'
             } flex items-center justify-center`}
-            aria-label="Register" onClick={()=>navigate('/collection-points')}
+            aria-label="Register"
+            onClick={()=>navigate('/collection-points')}
           >
             {loading ? <ClipLoader size={20} color="#fff" /> : 'Register'}
           </button>
         </form>
-        <p className="text-center text-sm text-gray-600 mt-6">
-          Already have an account?{' '}
-          <Link
-            to="/login"
-            className="text-emerald-500 hover:text-emerald-700 font-medium underline"
-            aria-label="Navigate to login page"
-          >
-            Log in 
-          </Link>
-        </p>
       </div>
     </div>
   );

@@ -50,16 +50,6 @@ const SearchControl = () => {
 
 const RwandaMap = () => {
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsAuthenticated(true);
-    } else {
-      navigate('/login');
-    }
-  }, [navigate]);
 
   const rwandaCenter = [-1.9403, 29.8739];
 
@@ -109,10 +99,6 @@ const RwandaMap = () => {
   const handleMarkerClick = (point) => {
     navigate('/home', { state: { point } });
   };
-
-  if (!isAuthenticated) {
-    return null; // Render nothing while redirecting
-  }
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-green-100 to-blue-100">
