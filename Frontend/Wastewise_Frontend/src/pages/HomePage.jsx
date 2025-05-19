@@ -29,8 +29,6 @@ const Homepage = () => {
           </div>
         </div>
       </main>
-
-      {/* You could add a footer here if needed */}
     </div>
   );
 };

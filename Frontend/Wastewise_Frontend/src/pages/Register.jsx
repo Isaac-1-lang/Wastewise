@@ -178,6 +178,7 @@ const Register = () => {
               placeholder="Enter company token"
               value={form.token}
               onChange={handleChange}
+              required
               className={`w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors ${
                 errors.email ? 'border-red-500' : 'border-gray-300'
               }`}
@@ -189,7 +190,7 @@ const Register = () => {
             className={`w-full p-3 rounded-lg text-white font-semibold transition-all duration-200 ${
               loading ? 'bg-emerald-300 cursor-not-allowed' : 'bg-emerald-500 hover:bg-emerald-600'
             } flex items-center justify-center`}
-            aria-label="Register"  onClick={()=>navigate('/collection-points')}
+            aria-label="Register" onClick={()=>navigate('/collection-points')}
           >
             {loading ? <ClipLoader size={20} color="#fff" /> : 'Register'}
           </button>

@@ -184,12 +184,12 @@ const Navbar = () => {
             </NavLink>
             
             <NavLink
-              to="/collection-points"
+              to="/services"
               className={navLinkStyle}
               onClick={() => setOpen(false)}
             >
               <MapPin size={18} />
-              <span>Collection Points</span>
+              <span>Services</span>
             </NavLink>
             
             <NavLink
