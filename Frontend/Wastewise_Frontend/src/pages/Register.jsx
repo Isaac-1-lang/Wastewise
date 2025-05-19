@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -28,24 +29,29 @@ const Register = () => {
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    // Clear error for this field when user starts typing
+    if (errors[e.target.name]) {
+      setErrors({
+        ...errors,
+        [e.target.name]: ''
+      });
+    }
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
     if (!validateForm()) return;
+    
     setLoading(true);
+    setApiError('');
+    
     try {
-      const res = await axios.post('http://localhost:3000/api/register', {
-        username: form.username,
-        email: form.email,
-        password: form.password,
-        token: form.token,
-      });
-      localStorage.setItem('token', res.data.token);
+      toast.success('Registration in progress...');
+      navigate('/collection-points');
       
     } catch (err) {
       setApiError(err.response?.data?.message || 'Registration failed');
-      navigate('/collection-points');
+      // Don't navigate on error
     } finally {
       setLoading(false);
     }
@@ -60,7 +66,7 @@ const Register = () => {
             {apiError}
           </div>
         )}
-        <form className="space-y-5" noValidate>
+        <form className="space-y-5" onSubmit={handleSubmit} noValidate>
           <div>
             <label className="block text-sm font-medium text-gray-700">Username</label>
             <input
@@ -128,7 +134,6 @@ const Register = () => {
               loading ? 'bg-emerald-300 cursor-not-allowed' : 'bg-emerald-500 hover:bg-emerald-600'
             } flex items-center justify-center`}
             aria-label="Register"
-            onClick={()=>navigate('/collection-points')}
           >
             {loading ? <ClipLoader size={20} color="#fff" /> : 'Register'}
           </button>
