@@ -16,7 +16,7 @@ const Login = () => {
     if (form.email=="isaprecieux112@gmail.com" && form.password=="361304olc0012024") {
       toast.success("Logged in successfully");
       navigate("/home");
-    } else if(form.email=="dari960@gmail.com" && form.password=="121402pr0732021") {
+    } else if(form.email=="darius@gmail.com" && form.password=="darius12") {
         navigate('/dashboard');
     } 
     else {

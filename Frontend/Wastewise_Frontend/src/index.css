@@ -13,6 +13,27 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scroll-left {
+  animation: scrollLeft 20s linear infinite;
+}
+/* styles.css */
+.inner-shadow {
+  box-shadow: inset 5px 0 8px -5px rgba(0, 0, 0, 0.5), /* left */
+              inset -5px 0 8px -5px rgba(0, 0, 0, 0.5); /* right */
+}
+
+.hover{
+  background-color:grey;
+}
 
 .dark {
   --tw-bg-opacity: 1;
