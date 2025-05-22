@@ -34,27 +34,27 @@ function CarouselTables() {
   };
 
   return (
-    <div className="relative w-full py-6">
+    <div className="relative ">
       <button
         onClick={() => scroll("left")}
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 hover:bg-gray-800 z-10"
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-green-700 text-white rounded-full p-2 hover:bg-gray-600 z-10"
       >
         ◀
       </button>
       <button
         onClick={() => scroll("right")}
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 hover:bg-gray-800 z-10"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-700 text-white rounded-full p-2 hover:bg-gray-800 z-10"
       >
         ▶
       </button>
 
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto scroll-smooth w-full snap-x snap-mandatory"
+        className="flex overflow-x-auto scroll-smooth w-full snap-x snap-mandatory no-scrollbar"
       >
         {/* Users Table */}
-        <div className="min-w-full snap-start p-5">
-          <div className="bg-white shadow-md rounded-lg p-5">
+        <div className="w-full min-w-full snap-start p-5 flex-shrink-0">
+          <div className="bg-white shadow-md rounded-lg p-5 w-full">
             <h2 className="text-2xl font-semibold mb-4 text-gray-700">Users</h2>
             <table className="w-full table-auto">
               <thead className="bg-green-100 text-gray-700">
@@ -88,13 +88,12 @@ function CarouselTables() {
         </div>
 
         {/* Companies Table */}
-        <div className="min-w-full snap-start p-5">
-          <div className="bg-white shadow-md rounded-lg p-5">
+        <div className="w-full min-w-full snap-start p-5 flex-shrink-0">
+          <div className="bg-white shadow-md rounded-lg p-5 w-full">
             <h2 className="text-2xl font-semibold mb-4 text-gray-700">Partner Companies</h2>
-            <table className="w-full text-left border-collapse">
+            <table className="w-full table-auto">
               <thead>
                 <tr className="bg-green-100 text-gray-700">
-                  <th className="py-2 px-4">No</th>
                   <th className="py-2 px-4">Name</th>
                   <th className="py-2 px-4">Location</th>
                   <th className="py-2 px-4">Contact Email</th>
@@ -103,7 +102,6 @@ function CarouselTables() {
               <tbody>
                 {companiesData.map((company) => (
                   <tr key={company.id} className="border-b hover:bg-green-50">
-                    <td className="py-2 px-4">{company.id}</td>
                     <td className="py-2 px-4 font-medium text-gray-800">{company.name}</td>
                     <td className="py-2 px-4">{company.location}</td>
                     <td className="py-2 px-4 text-blue-600 underline cursor-pointer">
@@ -117,10 +115,10 @@ function CarouselTables() {
         </div>
 
         {/* Requests Table */}
-        <div className="min-w-full snap-start p-5">
-          <div className="bg-white shadow-md rounded-lg p-5">
+        <div className="w-full min-w-full snap-start p-5 flex-shrink-0">
+          <div className="bg-white shadow-md rounded-lg p-5 w-full">
             <h2 className="text-2xl font-semibold mb-4 text-gray-700">Requests</h2>
-            <table className="w-full text-left border-collapse">
+            <table className="w-full table-auto">
               <thead>
                 <tr className="bg-green-100 text-gray-700">
                   <th className="py-2 px-4">Request ID</th>

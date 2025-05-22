@@ -1,6 +1,10 @@
 import { FaUsers, FaInbox, FaCheckCircle, FaHandshake } from "react-icons/fa";
 import OverviewCard from "../components/dashboard/OverviewCards";
 import CarouselTables from "../components/dashboard/CompaniesTable";
+import GarbageChart from "../components/dashboard/graph";
+import Footer from "../components/Footer";
+import RwandaMap from "./CollectionPoints";
+import ActivityLog from "../components/dashboard/NotificationsPanel";
 function Dashboard() {
     return (
         <>
@@ -23,9 +27,19 @@ function Dashboard() {
         <OverviewCard title="Total Partners" value={6} icon={<FaHandshake />} bgColor="bg-green-900" />
       </div>
             </div>
-            <div className="">
-                <CarouselTables/>
-            </div>
+           <div className="flex flex-col md:flex-row gap-6 p-6">
+  <div className="w-full md:w-1/2 mt--6">
+                    <CarouselTables />
+                    <RwandaMap />
+                    <ActivityLog/>
+  </div>
+  <div className="w-full md:w-1/2">
+    <GarbageChart />
+  </div>
+</div>
+ 
+            <Footer />
+            
     </>
   );
 }
