@@ -12,7 +12,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-
+import RwandaMap1 from './ChatPanel';
 ChartJS.register(
   BarElement,
   LineElement,
@@ -114,52 +114,65 @@ const GarbageChart = () => {
   };
 
   return (
-    <div className=" grid gap-12 p-6 bg-white rounded-xl shadow-md">
-      <div className="w-full">
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">Bar Chart - Cleanliness by Region</h2>
-        <Bar
-          data={barData}
-          options={{
-            ...chartOptions,
-            plugins: {
-              ...chartOptions.plugins,
-              title: { display: true, text: 'Cleanliness Percentage by Region' },
-            },
-            scales: {
-              ...chartOptions.scales,
-              y: { ...chartOptions.scales.y, max: 100 },
-            },
-          }}
-        />
-      </div>
-
-      <div className="w-full">
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">Line Chart - Garbage Collected</h2>
-        <Line
-          data={lineData}
-          options={{
-            ...chartOptions,
-            plugins: {
-              ...chartOptions.plugins,
-              title: { display: true, text: 'Garbage Collected (Tons) by Region' },
-            },
-            scales: {
-              ...chartOptions.scales,
-              y: {
-                beginAtZero: true,
-                title: { display: true, text: 'Tons' },
+    
+    <div className="p-6 bg-white rounded-xl shadow-md space-y-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        {/* Bar Chart */}
+        <div>
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Bar Chart - Cleanliness by Region</h2>
+          <Bar
+            data={barData}
+            options={{
+              ...chartOptions,
+              plugins: {
+                ...chartOptions.plugins,
+                title: { display: true, text: 'Cleanliness Percentage by Region' },
               },
-            },
-          }}
-        />
+              scales: {
+                ...chartOptions.scales,
+                y: { ...chartOptions.scales.y, max: 100 },
+              },
+            }}
+          />
+        </div>
+
+        {/* Line Chart */}
+        <div>
+          <h2 className="text-xl font-semibold mb-4 text-gray-700">Line Chart - Garbage Collected</h2>
+          <Line
+            data={lineData}
+            options={{
+              ...chartOptions,
+              plugins: {
+                ...chartOptions.plugins,
+                title: { display: true, text: 'Garbage Collected (Tons) by Region' },
+              },
+              scales: {
+                ...chartOptions.scales,
+                y: {
+                  beginAtZero: true,
+                  title: { display: true, text: 'Tons' },
+                },
+              },
+            }}
+          />
+        </div>
       </div>
 
-      <div className="w-full">
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">Pie Chart - Company Contributions</h2>
-        <Pie data={pieData} options={pieOptions} />
-      </div>
-    </div>
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+
+  <div className="bg-white rounded-xl shadow-md p-4 h-[690px]">
+    <h2 className="text-xl font-semibold mb-4 text-gray-700">Pie Chart - Company Contributions</h2>
+    <Pie data={pieData} options={pieOptions} />
+  </div>
+
+
+  <div className="bg-white rounded-xl shadow-md p-4 ">
+    <h2 className="text-xl font-semibold mb-4 text-gray-700">Region Map</h2>
+    <span className='h-[600px] w-full overflow-y-hidden '><RwandaMap1/></span> 
+  </div>
+</div>
+</div>
   );
-};
-
+}
 export default GarbageChart;

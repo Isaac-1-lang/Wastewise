@@ -26,7 +26,7 @@ const EnvironmentalAppSections = () => {
                 </div>
               </div>
               <img 
-                src="../" 
+                src="../../images/person1.png" 
                 alt="Community chat feature" 
                 className="w-full h-auto rounded-md"
               />
